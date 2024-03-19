@@ -10,11 +10,18 @@ def read_path_from_file(filename):
             path.append((x, y))
     return path
 
-map_file = "map4.txt"
+# Function to read map data from a text file
+def read_map_from_file(map_file):
+    with open(map_file, 'r') as f:
+        x_size, y_size = map(int, f.readline().split())
+        map_data = [[int(num) for num in line.split()] for line in f]
+    return x_size, y_size, map_data
+
+# Get map file name from user input
+map_file = input("Enter the name of the map file: ")
+
 # Read map data from file
-with open(map_file, 'r') as f:
-    x_size, y_size = map(int, f.readline().split())
-    map_data = [[int(num) for num in line.split()] for line in f]
+x_size, y_size, map_data = read_map_from_file(map_file)
 
 # Read path from file
 path_data = read_path_from_file('output.txt')
