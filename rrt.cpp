@@ -13,7 +13,6 @@ void RRT::solveRRT(Point start, Point goal){
         if (iter % 5 == 0){ //Sample the goal every 5 iterations
             sample = goal;
         }
-        // cout << "Sample: " << sample.x << " , " << sample.y << endl;
         if (!isValidPoint(sample)){ //Check that sample is valid
             continue;
         }
@@ -38,22 +37,17 @@ bool RRT::extend(Point sample){
     
     int nearest_point_index = getNearestPointIndex(sample);
     Point* nearest = &tree[nearest_point_index];
-    // cout << "Nearest point: " << nearest->x << " , " << nearest->y << endl;
     Point new_point; //New point in the direction of sample
-    // cout <<  nearest->x << ", " << getStepDirection(nearest->x, sample.x) << ", "<< step_size <<endl;
     new_point.x = nearest->x + getStepDirection(nearest->x, sample.x)*step_size;
     new_point.y = nearest->y + getStepDirection(nearest->y, sample.y)*step_size;
     bool temp = isValidPoint(new_point);
-    // cout << "New point: " << new_point.x << " , " << new_point.y << "Valid? " << temp << endl;
     if (isValidEdge(tree[nearest_point_index], new_point)){
         tree.push_back(new_point);
         parent[tree.size()-1] =  nearest_point_index;
-        // cout << "Moving" << endl;
         
         return true; //Success
 
     }
-    // cout << "Trapped" << endl;
     return false; //Trapped
 }
 
