@@ -49,8 +49,21 @@ void writePathToFile(const std::vector<Point>& path, const std::string& filename
 
 int main(int argc, char* argv[]) {
     string map_file = "map1.txt";
-    if (argc > 1){
+    int start_x = 0, start_y = 0, goal_x = 10, goal_y = 10;
+    if (argc == 2){
         map_file = argv[1];
+    }
+    else if (argc > 2){
+        if (argc != 6){
+            cerr << "Not enough inputs, enter start_x start_y goal_x goal_y" << endl;
+            return 0;
+        }
+        map_file = argv[1];
+        start_x = atoi(argv[2]);
+        start_y = atoi(argv[3]);
+        goal_x = atoi(argv[4]);
+        goal_y = atoi(argv[5]);
+        cout << start_x;
     }
     else{
         cout << "No argument for map, using default (map1)" << endl;
@@ -58,8 +71,8 @@ int main(int argc, char* argv[]) {
     Map testMap = loadMapFromFile(map_file);
 
     // Define start and goal points
-    Point start(200, 200);
-    Point goal(300, 300);
+    Point start(start_x, start_y);
+    Point goal(goal_x, goal_y);
 
     // Create an instance of RRT
     RRT rrt(testMap);
