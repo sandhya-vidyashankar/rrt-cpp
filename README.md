@@ -1,5 +1,5 @@
 # rrt-cpp
-Implementation of RRT with C++ for Mowito challenge. 
+Implementation of RRT with C++ 
 
 ## Overview of Files
 The main RRT code is stored in rrt.cpp, with the header file rrt.h. 
